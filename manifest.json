@@ -7,7 +7,7 @@
   "orientation": "portrait",
   "manifest_version": 2,
   "scope": "/",
-  "start_url": "https://my-to-do-app-three-henna.vercel.app/",
+  "start_url": "/",
   "icons": [
     {
       "src": "images/icons/192.png",
