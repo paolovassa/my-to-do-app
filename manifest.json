@@ -7,7 +7,7 @@
   "orientation": "portrait",
   "manifest_version": 2,
   "scope": "/",
-  "start_url": "/app",
+  "start_url": "/",
   "icons": [
     {
       "src": "images/512.png",
