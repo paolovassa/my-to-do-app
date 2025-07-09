@@ -1,0 +1,19 @@
+{
+  "name": "MyToDoApp",
+  "short_name": "ToDoApp",
+  "theme_color": "#222",
+  "background_color": "#efefef",
+  "display": "standalone",
+  "orientation": "portrait",
+  "manifest_version": 2,
+  "scope": "/",
+  "start_url": "/app",
+  "icons": [
+    {
+      "src": "images/512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "splash_pages": null
+}
