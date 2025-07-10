@@ -1,7 +1,9 @@
 body {
-  background-color: rgb(255, 160, 122);
+  background-color: #ffa07a;
   font-family: "Montserrat", sans-serif;
 }
+
+/*Pagina principale dell'app */
 
 .valid-input {
   color: var(--bs-success);
@@ -34,8 +36,69 @@ body {
   background-color: lightsalmon;
 }
 
-textarea#descriptionInput,
-select#priorityInput {
+.form-control,
+.form-select {
   background-color: #ffd2c873;
   border: none;
+}
+
+.form-control:focus,
+.form-select:focus {
+  box-shadow: 0 0 0 0.25rem rgba(255, 210, 200, 0.51);
+}
+
+/* Pagina di autenticazione */
+.login-section {
+  padding-top: 8rem;
+  padding-bottom: 5.75rem;
+}
+
+#pills-tab button {
+  color: var(--bs-dark);
+  border-width: 1px;
+  border-color: lightsalmon;
+}
+
+#pills-tab button.active {
+  background-color: lightsalmon;
+  font-weight: 500;
+}
+
+.my-form {
+  padding: 1.25rem;
+}
+
+.input-fields {
+  margin-bottom: 1.5rem;
+}
+
+.form-header {
+  font-size: 1.1rem;
+}
+
+.btn-form {
+  border: none;
+  padding: 0.5rem 1.5rem;
+  background-color: lightsalmon;
+  letter-spacing: 0.55px;
+}
+
+/* Media queries */
+
+@media (min-width: 767px) {
+  .input-fields {
+    padding-right: 4.5rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .input-fields {
+    padding-right: 5rem;
+  }
+}
+
+@media (min-width: 1400px) {
+  .input-fields {
+    padding-right: 7rem;
+  }
 }
