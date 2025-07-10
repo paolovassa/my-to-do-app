@@ -2,7 +2,7 @@
   "name": "MyToDoApp",
   "short_name": "ToDoApp",
   "theme_color": "#222",
-  "background_color": "#efefef",
+  "background_color": "#ffd2c873",
   "display": "standalone",
   "orientation": "portrait",
   "manifest_version": 2,
