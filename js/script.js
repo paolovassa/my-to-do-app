@@ -1,5 +1,17 @@
 const capitalizeStr = (str) => str[0].toUpperCase() + str.slice(1);
 
+/*Controlla se ci sono elementi nel <div> con id "todo-grid": se ci sono mostra il campo di
+ricerca, se non ci sono lo nasconde. Deve essere eseguita: quando carica la pagina, dopo la
+funzione che mostra gli impegni memorizzati; quando si aggiunge un nuovo impegno; quando si
+rimuove un impegno dalla griglia. */
+function checkGridUI() {
+  if (todoGrid.children.length > 0) {
+    searchRow.classList.remove("d-none");
+  } else {
+    searchRow.classList.add("d-none");
+  }
+}
+
 /*Aggiunge la classe "valid-input" all'elemento che è il fratello immediatamente successivo
 al controllo fornito come argomento alla funzione. */
 function markAsValid(inputField) {
@@ -168,6 +180,7 @@ function addNewTodo(description, priority, todoID) {
 
   todoGrid.appendChild(newTodoCard);
   toggleSpinner();
+  checkGridUI();
 }
 
 function removeTodo(activityToDelete) {
@@ -190,6 +203,8 @@ function removeTodo(activityToDelete) {
       todosDB.findIndex((todo) => todo.id === activityID),
       1
     );
+
+    checkGridUI();
   }
 }
 
@@ -254,6 +269,7 @@ var addBtn = document.getElementById("add-btn");
 var inputSection = document.getElementById("input-section");
 var todoGrid = document.getElementById("todo-grid");
 var inputForm = document.getElementById("input-form");
+var searchRow = document.querySelector(".search-row");
 
 //Event Listeners
 window.addEventListener("DOMContentLoaded", () => {
@@ -267,6 +283,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   populateSelect(prioritySelect, priorities);
   displayStoredActivities();
+  checkGridUI();
 });
 
 inputSection.addEventListener("input", checkValidInputs);
@@ -316,7 +333,7 @@ inputForm.addEventListener("submit", (e) => {
       IDToUse = lastUsedID;
       addNewTodo(inputDescription, inputPriority, IDToUse);
       updateLocalStorage();
-    }, 500);
+    }, 400);
   }
 
   descriptionInput.value = "";
