@@ -65,13 +65,13 @@ function generateTodoCard(description, priority, id) {
   todoColumn.classList.add("col");
 
   todoColumn.innerHTML = `            
-  <div class="card todo-card bg-light border-0 rounded-0">
+  <div class="card todo-card bg-light border-0 rounded-2">
     <div class="interaction-icons d-flex gap-2">
       <i class="bi bi-pencil-square"></i>
       <i class="bi bi-x-lg"></i>
     </div>
     <div class="card-body p-4 pt-5">
-      <p class="card-text todo-description">
+      <p class="card-text todo-description p-2">
         ${description}
       </p>
     </div>

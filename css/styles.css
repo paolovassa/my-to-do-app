@@ -56,3 +56,11 @@ body {
   font-weight: 300;
   font-style: italic;
 }
+
+/*Media Queries */
+@media (max-width: 575px) {
+  #todo-grid {
+    padding-left: 1.35rem;
+    padding-right: 1.35rem;
+  }
+}
