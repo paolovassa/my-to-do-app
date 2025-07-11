@@ -6,11 +6,23 @@ funzione che mostra gli impegni memorizzati; quando si aggiunge un nuovo impegno
 rimuove un impegno dalla griglia. */
 function checkGridUI() {
   if (todoGrid.children.length > 0) {
-    searchRow.classList.remove("d-none");
+    searchSection.classList.remove("d-none");
   } else {
-    searchRow.classList.add("d-none");
+    searchSection.classList.add("d-none");
   }
 }
+
+const generateEmptyGridMsg = () => {
+  const messageCol = document.createElement("div");
+  messageCol.classList.add("col", "empty-grid-message");
+
+  const message = document.createElement("p");
+  message.appendChild(document.createTextNode("Nessun risultato trovato"));
+
+  messageCol.appendChild(message);
+
+  return messageCol;
+};
 
 /*Aggiunge la classe "valid-input" all'elemento che è il fratello immediatamente successivo
 al controllo fornito come argomento alla funzione. */
@@ -164,6 +176,35 @@ function checkValidInputs(e) {
   if (validDescription && validPriority) addBtn.removeAttribute("disabled");
 }
 
+/*Itera su ciascuna colonna della griglia e controlla se la descrizione della card 
+corrispondente contiene la stringa attualmente inserita nel campo di ricerca: se non la 
+contiene nasconde la colonna. */
+function searchCriterionMatch() {
+  const searchStr = searchInput.value.trim().toLowerCase();
+  const emptyGridMsg = todoGrid.querySelector(".empty-grid-message");
+
+  if (emptyGridMsg) emptyGridMsg.remove();
+
+  let noMatch = true;
+  const gridColumns = todoGrid.querySelectorAll(".col");
+
+  gridColumns.forEach((col) => {
+    const cardText = col
+      .querySelector(".card-text")
+      .textContent.trim()
+      .toLowerCase();
+
+    if (cardText.includes(searchStr)) {
+      col.classList.remove("d-none");
+      noMatch = false;
+    } else {
+      col.classList.add("d-none");
+    }
+  });
+
+  if (noMatch) todoGrid.appendChild(generateEmptyGridMsg());
+}
+
 function addNewTodo(description, priority, todoID) {
   //Oggetto JS che rappresenta il nuovo todo, viene poi aggiunto nella struttura dati
   const newTodoObject = {
@@ -265,11 +306,13 @@ var editingActivityID = 0;
 
 var prioritySelect = document.getElementById("priorityInput");
 var descriptionInput = document.getElementById("descriptionInput");
+var searchInput = document.getElementById("searchInput");
+
 var addBtn = document.getElementById("add-btn");
 var inputSection = document.getElementById("input-section");
 var todoGrid = document.getElementById("todo-grid");
 var inputForm = document.getElementById("input-form");
-var searchRow = document.querySelector(".search-row");
+var searchSection = document.getElementById("search-section");
 
 //Event Listeners
 window.addEventListener("DOMContentLoaded", () => {
@@ -316,7 +359,7 @@ inputForm.addEventListener("submit", (e) => {
 
     const currentActivityVersionDOM = todoGrid.querySelector(
       `[data-id = "${IDToUse}"]`
-    );
+    ).parentElement;
     currentActivityVersionDOM.insertAdjacentElement(
       "beforebegin",
       updatedActivityDOM
@@ -325,6 +368,7 @@ inputForm.addEventListener("submit", (e) => {
 
     addBtn.innerHTML = `<i class="bi bi-plus-circle me-1"></i> Aggiungi`;
     editingActivityID = 0;
+    searchCriterionMatch();
     updateLocalStorage();
   } else {
     toggleSpinner();
@@ -332,6 +376,7 @@ inputForm.addEventListener("submit", (e) => {
     setTimeout(() => {
       IDToUse = lastUsedID;
       addNewTodo(inputDescription, inputPriority, IDToUse);
+      searchCriterionMatch();
       updateLocalStorage();
     }, 400);
   }
@@ -342,3 +387,5 @@ inputForm.addEventListener("submit", (e) => {
 });
 
 todoGrid.addEventListener("click", gridInteraction);
+
+searchInput.addEventListener("input", searchCriterionMatch);
