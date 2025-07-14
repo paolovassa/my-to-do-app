@@ -33,6 +33,19 @@ const toggleSpinner = () => {
   }
 };
 
+/*Eseguita quando si clicca su un punto qualsiasi della sezione con le istruzioni. Se ad 
+essere cliccato è uno dei due pulsanti viene memorizzato nello storage quale dei due è
+stato cliccato. */
+function formRedirection(e) {
+  // e.preventDefault();
+  const target = e.target;
+
+  if (target.matches(".btn")) {
+    const redirectToPanel = target.getAttribute("data-panel");
+    localStorage.setItem("redirectToPanel", JSON.stringify(redirectToPanel));
+  }
+}
+
 /*Prende in input una stringa che contiene la descrizione di un'attività e un numero intero 
 che rappresenta la sua priorità. Crea e restituisce un elemento con classe "col" che contiene 
 la card che rappresenta l'impegno i cui dati sono stati forniti in input. */
@@ -254,6 +267,7 @@ var addBtn = document.getElementById("add-btn");
 var inputSection = document.getElementById("input-section");
 var todoGrid = document.getElementById("todo-grid");
 var inputForm = document.getElementById("input-form");
+var appInstructions = document.querySelector(".app-explanation");
 
 //Event Listeners
 window.addEventListener("DOMContentLoaded", () => {
@@ -325,3 +339,4 @@ inputForm.addEventListener("submit", (e) => {
 });
 
 todoGrid.addEventListener("click", gridInteraction);
+appInstructions.addEventListener("click", formRedirection);

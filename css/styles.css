@@ -4,6 +4,10 @@ body {
 }
 
 /*Pagina principale dell'app */
+.header {
+  padding-top: 4rem;
+  padding-bottom: 2rem;
+}
 
 .valid-input {
   color: var(--bs-success);
@@ -45,6 +49,15 @@ body {
 .form-control:focus,
 .form-select:focus {
   box-shadow: 0 0 0 0.25rem rgba(255, 210, 200, 0.51);
+}
+
+.redirect-btns .btn {
+  padding: 0.75rem 1rem;
+  letter-spacing: 0.8px;
+}
+
+.redirect-btns > :first-child {
+  background-color: rgba(255, 210, 200, 0.7);
 }
 
 /* Pagina di autenticazione */
