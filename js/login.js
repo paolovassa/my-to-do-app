@@ -1,38 +1,61 @@
-/*Aggiunge la classe "valid-input" all'elemento che è il fratello immediatamente successivo
-al controllo fornito come argomento alla funzione. */
-function markAsValid(inputField) {
-  inputField.nextElementSibling.classList.add("valid-input");
-}
+/*Data una stringa restituisce "true" se contiene almeno un numero, "false" altrimenti. */
+const includesNumber = (str) => {
+  for (let i = 0; i < str.length; i++) {
+    if (!isNaN(str[i])) return true;
+  }
 
-/*Rimuove la classe "valid-input" all'elemento che è il fratello immediatamente successivo
-al controllo fornito come argomento alla funzione. */
-function markAsInvalid(inputField) {
-  inputField.nextElementSibling.classList.remove("valid-input");
-}
-
-/*Eseguita ogni volta che l'utente inserisce un input in uno dei campi. Resetta la sezione
-di input rimuovendo la classe "valid-input" da entrambi i controlli e disabilitando il 
-pulsante di inserimento.*/
-const resetLoginSection = (formControls) => {
-  formControls.forEach((control) => {
-    markAsInvalid(control);
-  });
-
-  loginBtn.setAttribute("disabled", "");
+  return false;
 };
 
-function checkValidLogin() {
-  const formControls = this.querySelectorAll(".form-control");
+/* Dato un campo input di tipo password restituisce "true" se il valore contenuto nel campo
+al momento della chiamata soddisfa tutti i vincoli impostati. */
+function checkValidPassword() {
+  let validPassword = true;
+  const currentPasswordValue = registerPasswordInput.value;
 
-  resetLoginSection(formControls);
+  const lengthConstraintText = document.querySelector(
+    "#length-password-constraint"
+  );
+  const digitConstraintText = document.querySelector(
+    "#digit-password-constraint"
+  );
+
+  if (currentPasswordValue.length >= 8) {
+    lengthConstraintText.classList.add("valid-input");
+  } else {
+    lengthConstraintText.classList.remove("valid-input");
+    validPassword = false;
+  }
+
+  if (includesNumber(currentPasswordValue)) {
+    digitConstraintText.classList.add("valid-input");
+  } else {
+    digitConstraintText.classList.remove("valid-input");
+    validPassword = false;
+  }
+
+  console.log(validPassword);
+}
+
+function checkValidLogin() {
+  loginBtn.setAttribute("disabled", "");
+  const formControls = this.querySelectorAll(".form-control");
 
   let allValid = true;
 
   formControls.forEach((control) => {
+    const IDslices = control.getAttribute("id").split("-");
+    const textID = [
+      ...IDslices.slice(0, IDslices.length - 1),
+      "constraint",
+    ].join("-");
+    const controlText = document.querySelector(`#${textID}`);
+
     if (control.value.trim() === "") {
+      controlText.classList.remove("valid-input");
       allValid = false;
     } else {
-      markAsValid(control);
+      controlText.classList.add("valid-input");
     }
   });
 
@@ -62,7 +85,10 @@ function showSelectedPanel() {
 var pillsTabContent = document.getElementById("pills-tabContent");
 var loginBtn = document.getElementById("login-btn");
 var loginForm = document.getElementById("login-form");
+var registerForm = document.getElementById("register-form");
+var registerPasswordInput = document.getElementById("register-password-input");
 
 //Event Listeners
 window.addEventListener("DOMContentLoaded", showSelectedPanel);
 loginForm.addEventListener("input", checkValidLogin);
+registerForm.addEventListener("input", checkValidPassword);

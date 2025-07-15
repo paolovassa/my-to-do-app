@@ -95,7 +95,7 @@
                           type="text"
                           class="form-control mb-2"
                         />
-                        <div id="username-constraint" class="form-text">
+                        <div id="login-username-constraint" class="form-text">
                           <i class="bi bi-check2-circle"></i> Non deve essere
                           vuoto
                         </div>
@@ -114,7 +114,7 @@
                           type="password"
                           class="form-control mb-2"
                         />
-                        <div id="password-constraint" class="form-text">
+                        <div id="login-password-constraint" class="form-text">
                           <i class="bi bi-check2-circle"></i> Non deve essere
                           vuoto
                         </div>
@@ -166,8 +166,15 @@
                         <input
                           id="register-username-input"
                           type="text"
-                          class="form-control"
+                          class="form-control mb-2"
                         />
+                        <div
+                          id="register-username-constraint"
+                          class="form-text"
+                        >
+                          <i class="bi bi-check2-circle"></i> Deve contenere
+                          almeno 6 caratteri
+                        </div>
                       </div>
                       <!--Fine campo username-->
                       <!--Campo email-->
@@ -194,8 +201,21 @@
                         <input
                           id="register-password-input"
                           type="password"
-                          class="form-control"
+                          class="form-control mb-2"
                         />
+                        <div class="password-constraints">
+                          <div
+                            id="length-password-constraint"
+                            class="form-text mb-1"
+                          >
+                            <i class="bi bi-check2-circle"></i> Deve contenere
+                            almeno 8 caratteri
+                          </div>
+                          <div id="digit-password-constraint" class="form-text">
+                            <i class="bi bi-check2-circle"></i> Deve contenere
+                            almeno un numero
+                          </div>
+                        </div>
                       </div>
                       <!--Fine campo password-->
                       <!--Campo conferma password-->
