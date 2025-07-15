@@ -187,8 +187,12 @@
                         <input
                           id="register-email-input"
                           type="email"
-                          class="form-control"
+                          class="form-control mb-2"
                         />
+                        <div id="register-email-constraint" class="form-text">
+                          <i class="bi bi-check2-circle"></i> Deve essere un
+                          indirizzo email valido
+                        </div>
                       </div>
                       <!--Fine campo email-->
                       <!--Campo password-->
@@ -228,8 +232,15 @@
                         <input
                           id="confirm-register-password"
                           type="password"
-                          class="form-control"
+                          class="form-control mb-2"
                         />
+                        <div
+                          id="correspondence-register-password"
+                          class="form-text"
+                        >
+                          <i class="bi bi-check2-circle"></i> Le due password
+                          devono essere identiche
+                        </div>
                       </div>
                       <!--Fine campo conferma password-->
                     </div>
